@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import itertools
 
 class DICTIONARY():
     def __init__(self):
@@ -30,16 +31,53 @@ if __name__ == '__main__':
     # sのソート
     s = list(s.lower())
     s.sort()
-
-    # 辞書と入力文字を比較
-    for word_count in range(len(dictionary.data_sorted)):
-        if s == dictionary.data_sorted[word_count]:
-            print ("I found: {}").format(dictionary.data[word_count])
+    found = False
+    for i in range(len(s), 1, -1):
+        p = itertools.combinations(s, i)
+        for j in p:
+            for word_count in range(len(dictionary.data_sorted)):
+                # 辞書と入力文字を比較
+                # 総当り戦
+                if list(j) == dictionary.data_sorted[word_count]:
+                    print ("I found: {}").format(dictionary.data[word_count])
+                    found = True
+                    break
+            if found:
+                break
+        if found:
             break
+    '''
+    I could not treat multiple same char
+    ex.
+    ('m', 'n', 'o') (print j)
+    I found: Mon
 
+    ('m', 'n', 'o')
+    I found: Mon
+    '''
     '''
     kochigami@kochigami-ThinkPad-T450:~/STEP2018/hw1$ python hw1.py 
-    Enter alphabets: moonstarer
-    I found: astronomer
+    Enter alphabets: moon
+    ('m', 'n', 'o', 'o')
+    I found: Moon
+
+    ('m', 'n', 'o')
+    I found: Mon
+
+    ('m', 'n', 'o')
+    I found: Mon
+
+    ('m', 'o', 'o')
+    I found: moo
+
+    ('n', 'o', 'o')
+    I found: Ono
+
+    ('m', 'n')
+    ('m', 'o')
+    ('m', 'o')
+    ('n', 'o')
+    ('n', 'o')
+    ('o', 'o')
     '''
         
