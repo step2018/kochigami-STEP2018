@@ -5,8 +5,11 @@ import itertools
 class DICTIONARY():
     def __init__(self):
         self.data = []
-        self.data_sorted = []
+        self.data_dict_sorted = {}
+        self.data_dict = {}
         self.read_dictionary("dictionary.txt")
+        self.create_dict()
+        self.sort_dictionary()
 
     def read_dictionary(self, dictionary_name):
         # 辞書の読み込み
@@ -15,14 +18,60 @@ class DICTIONARY():
             self.data.append(line)
         dict_data_tmp.close()
 
+    def sort_dictionary(self):
+        self.data_dict_sorted[2] = []
+        self.data_dict_sorted[3] = []
+        self.data_dict_sorted[4] = []
+        self.data_dict_sorted[5] = []
+        self.data_dict_sorted[6] = []
+        self.data_dict_sorted[7] = []
+        self.data_dict_sorted[8] = []
+        self.data_dict_sorted[9] = []
+        self.data_dict_sorted[10] = []
+        self.data_dict_sorted[11] = []
+        self.data_dict_sorted[12] = []
+        self.data_dict_sorted[13] = []
+        self.data_dict_sorted[14] = []
+        self.data_dict_sorted[15] = []
+        self.data_dict_sorted[16] = []
+        self.data_dict_sorted[17] = []
+        self.data_dict_sorted[18] = []
         # ソートされた辞書の作成
+        for key in self.data_dict.keys():
+            for word in self.data_dict[key]:
+                # 単語の分割．文字を一つずつ取り出す
+                #chars = list(word.lower())
+                # ex. chars: ['b', 'l', 'a', 'd', 'e', 's', '\n'] need to delete \n
+                #chars[len(chars)-1:]=[]
+                word_sorted = sorted(word)
+                self.data_dict_sorted[len(word)].append(word_sorted)
+
+    def create_dict(self):
+        # separate by number of chars
+        self.data_dict[2] = []
+        self.data_dict[3] = []
+        self.data_dict[4] = []
+        self.data_dict[5] = []
+        self.data_dict[6] = []
+        self.data_dict[7] = []
+        self.data_dict[8] = []
+        self.data_dict[9] = []
+        self.data_dict[10] = []
+        self.data_dict[11] = []
+        self.data_dict[12] = []
+        self.data_dict[13] = []
+        self.data_dict[14] = []
+        self.data_dict[15] = []
+        self.data_dict[16] = []
+        self.data_dict[17] = []
+        self.data_dict[18] = []
+
         for word in self.data:
             # 単語の分割．文字を一つずつ取り出す
             chars = list(word.lower())
             # ex. chars: ['b', 'l', 'a', 'd', 'e', 's', '\n'] need to delete \n
             chars[len(chars)-1:]=[]
-            chars.sort()
-            self.data_sorted.append(chars)
+            self.data_dict[len(chars)].append(chars)
 
 if __name__ == '__main__':
     dictionary = DICTIONARY()
@@ -35,49 +84,14 @@ if __name__ == '__main__':
     for i in range(len(s), 1, -1):
         p = itertools.combinations(s, i)
         for j in p:
-            for word_count in range(len(dictionary.data_sorted)):
+            for word_count in range(len(dictionary.data_dict[len(j)])):
                 # 辞書と入力文字を比較
-                # 総当り戦
-                if list(j) == dictionary.data_sorted[word_count]:
-                    print ("I found: {}").format(dictionary.data[word_count])
+                if list(j) == dictionary.data_dict_sorted[len(j)][word_count]:
+                    print ("I found: {}").format(dictionary.data_dict[len(j)][word_count])
                     found = True
                     break
             if found:
                 break
         if found:
             break
-    '''
-    I could not treat multiple same char
-    ex.
-    ('m', 'n', 'o') (print j)
-    I found: Mon
-
-    ('m', 'n', 'o')
-    I found: Mon
-    '''
-    '''
-    kochigami@kochigami-ThinkPad-T450:~/STEP2018/hw1$ python hw1.py 
-    Enter alphabets: moon
-    ('m', 'n', 'o', 'o')
-    I found: Moon
-
-    ('m', 'n', 'o')
-    I found: Mon
-
-    ('m', 'n', 'o')
-    I found: Mon
-
-    ('m', 'o', 'o')
-    I found: moo
-
-    ('n', 'o', 'o')
-    I found: Ono
-
-    ('m', 'n')
-    ('m', 'o')
-    ('m', 'o')
-    ('n', 'o')
-    ('n', 'o')
-    ('o', 'o')
-    '''
         
