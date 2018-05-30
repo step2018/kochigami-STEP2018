@@ -77,14 +77,28 @@ if __name__ == '__main__':
     s = list(s.lower())
     s.sort()
     count = len(s)
-    found = False
+    candidate = []
+    candidate_tag = []
     # 辞書の中の文字数が多いものから検索
     for i in range(count, 1, -1):
         for word_count in range(len(dictionary.data_dict_sorted[i])):
             intersection = list(set(dictionary.data_dict_sorted[i][word_count]) & (set(s)))
             if len(intersection) == len(dictionary.data_dict_sorted[i][word_count]):
-                print ("I found: {}").format(''.join(dictionary.data_dict[i][word_count]))
-                found = True
-                break
-        if found:
-            break
+                candidate.append(intersection)
+                candidate_tag.append(''.join(dictionary.data_dict[i][word_count]))
+
+    # 点数の高いものを選ぶ
+    point = []
+    for word in candidate:
+        tmp = 0
+        for s in word:
+            if s == 'j' or s == 'k' or s == 'q' or s == 'x' or s == 'z':
+                tmp+=3
+            elif s == 'c' or s == 'f' or s == 'h' or s == 'l' or s == 'm' or s == 'p' or s == 'v' or s == 'w' or s == 'y':
+                tmp+=2
+            else:
+                tmp+=1
+        point.append(tmp)
+
+    max_idx = point.index(max(point))
+    print ("I found: {}").format(candidate_tag[max_idx])
