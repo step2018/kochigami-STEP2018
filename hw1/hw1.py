@@ -76,18 +76,15 @@ if __name__ == '__main__':
     # sのソート
     s = list(s.lower())
     s.sort()
+    count = len(s)
     found = False
-    for i in range(len(s), 1, -1):
-        p = itertools.combinations(s, i)
-        for j in p:
-            for word_count in range(len(dictionary.data_dict[len(j)])):
-                # 辞書と入力文字を比較
-                if list(j) == dictionary.data_dict_sorted[len(j)][word_count]:
-                    print ("I found: {}").format(''.join(dictionary.data_dict[len(j)][word_count]))
-                    found = True
-                    break
-            if found:
+    # 辞書の中の文字数が多いものから検索
+    for i in range(count, 1, -1):
+        for word_count in range(len(dictionary.data_dict_sorted[i])):
+            intersection = list(set(dictionary.data_dict_sorted[i][word_count]) & (set(s)))
+            if len(intersection) == len(dictionary.data_dict_sorted[i][word_count]):
+                print ("I found: {}").format(''.join(dictionary.data_dict[i][word_count]))
+                found = True
                 break
         if found:
             break
-        
