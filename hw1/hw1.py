@@ -9,7 +9,7 @@ class DICTIONARY():
         self.data_dict = {}
         self.read_dictionary("dictionary.txt")
         self.create_dict()
-        self.sort_dictionary()
+        self.sort_dict()
 
     def read_dictionary(self, dictionary_name):
         # 辞書の読み込み
@@ -17,34 +17,6 @@ class DICTIONARY():
         for line in dict_data_tmp:
             self.data.append(line)
         dict_data_tmp.close()
-
-    def sort_dictionary(self):
-        self.data_dict_sorted[2] = []
-        self.data_dict_sorted[3] = []
-        self.data_dict_sorted[4] = []
-        self.data_dict_sorted[5] = []
-        self.data_dict_sorted[6] = []
-        self.data_dict_sorted[7] = []
-        self.data_dict_sorted[8] = []
-        self.data_dict_sorted[9] = []
-        self.data_dict_sorted[10] = []
-        self.data_dict_sorted[11] = []
-        self.data_dict_sorted[12] = []
-        self.data_dict_sorted[13] = []
-        self.data_dict_sorted[14] = []
-        self.data_dict_sorted[15] = []
-        self.data_dict_sorted[16] = []
-        self.data_dict_sorted[17] = []
-        self.data_dict_sorted[18] = []
-        # ソートされた辞書の作成
-        for key in self.data_dict.keys():
-            for word in self.data_dict[key]:
-                # 単語の分割．文字を一つずつ取り出す
-                #chars = list(word.lower())
-                # ex. chars: ['b', 'l', 'a', 'd', 'e', 's', '\n'] need to delete \n
-                #chars[len(chars)-1:]=[]
-                word_sorted = sorted(word)
-                self.data_dict_sorted[len(word)].append(word_sorted)
 
     def create_dict(self):
         # separate by number of chars
@@ -73,6 +45,30 @@ class DICTIONARY():
             chars[len(chars)-1:]=[]
             self.data_dict[len(chars)].append(chars)
 
+    def sort_dict(self):
+        self.data_dict_sorted[2] = []
+        self.data_dict_sorted[3] = []
+        self.data_dict_sorted[4] = []
+        self.data_dict_sorted[5] = []
+        self.data_dict_sorted[6] = []
+        self.data_dict_sorted[7] = []
+        self.data_dict_sorted[8] = []
+        self.data_dict_sorted[9] = []
+        self.data_dict_sorted[10] = []
+        self.data_dict_sorted[11] = []
+        self.data_dict_sorted[12] = []
+        self.data_dict_sorted[13] = []
+        self.data_dict_sorted[14] = []
+        self.data_dict_sorted[15] = []
+        self.data_dict_sorted[16] = []
+        self.data_dict_sorted[17] = []
+        self.data_dict_sorted[18] = []
+        # ソートされた辞書の作成
+        for key in self.data_dict.keys():
+            for word in self.data_dict[key]:
+                word_sorted = sorted(word)
+                self.data_dict_sorted[len(word)].append(word_sorted)
+
 if __name__ == '__main__':
     dictionary = DICTIONARY()
     # 文字の入力
@@ -87,7 +83,7 @@ if __name__ == '__main__':
             for word_count in range(len(dictionary.data_dict[len(j)])):
                 # 辞書と入力文字を比較
                 if list(j) == dictionary.data_dict_sorted[len(j)][word_count]:
-                    print ("I found: {}").format(dictionary.data_dict[len(j)][word_count])
+                    print ("I found: {}").format(''.join(dictionary.data_dict[len(j)][word_count]))
                     found = True
                     break
             if found:
