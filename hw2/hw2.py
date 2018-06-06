@@ -42,5 +42,5 @@ if __name__ == '__main__':
         y.append(end - begin)
         
     plt.plot(x, y)
-    plt.title("test")
+    plt.title("Releationship between N and calculation time")
     plt.show()
