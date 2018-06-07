@@ -18,29 +18,13 @@ class DICTIONARY():
     def create_dict(self):
         # separate by number of chars of a word
         # ex. "rabbit" enters data_dict[6]
-        self.data_dict[2] = []
-        self.data_dict[3] = []
-        self.data_dict[4] = []
-        self.data_dict[5] = []
-        self.data_dict[6] = []
-        self.data_dict[7] = []
-        self.data_dict[8] = []
-        self.data_dict[9] = []
-        self.data_dict[10] = []
-        self.data_dict[11] = []
-        self.data_dict[12] = []
-        self.data_dict[13] = []
-        self.data_dict[14] = []
-        self.data_dict[15] = []
-        self.data_dict[16] = []
-        self.data_dict[17] = []
-        self.data_dict[18] = []
+        # You might want to initialize this using list comprehension for simplicity:
+        self.data_dict = {len: [] for len in range(2,19)}
 
         for word in self.data:
             # 単語の分割．文字を一つずつ取り出してリストに入れる
-            chars = list(word.lower())
-            # ex. chars: ['b', 'l', 'a', 'd', 'e', 's', '\n'] need to delete \n
-            chars[len(chars)-1:]=[]
+            chars = list(word.lower().rstrip()) # rstripで空白を簡単に消せる（これでもし空白じゃなかったら間違って意味のある文字は消されない）
+            # ex. chars: ['b', 'l', 'a', 'd', 'e', 's']
             self.data_dict[len(chars)].append(chars)
 
 '''
